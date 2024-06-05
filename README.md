@@ -8,7 +8,7 @@ Based on [Building a REST API with NestJS and Prisma](https://www.prisma.io/blog
 
 ### 1. Building a REST API with NestJS and Prisma
 
-- create NestJS project
+- Create NestJS project
 
 ```bash
 $ npx @nestjs/cli new median
@@ -22,22 +22,22 @@ $ npx @nestjs/cli new median
 $ docker-compose up -d
 ```
 
-- set up Prisma
+- Set up Prisma
 
 ```bash
 $ npm install -D prisma
 $ npx prisma init
 ```
 
-- set environment variable (`.env`)
-- create Prisma schema (`prisma/prisma.schema`)
-- migrate the database
+- Set environment variable (`.env`)
+- Create Prisma schema (`prisma/prisma.schema`)
+- Migrate the database
 
 ```bash
 $ npx prisma migrate dev --name "init"
 ```
 
-- seed the database
+- Seed the database
   - create `prisma/seed.ts`
   - add the prisma.seed key to the end of your `package.json`
   - execute seeding
@@ -46,7 +46,7 @@ $ npx prisma migrate dev --name "init"
 $ npx prisma db seed
 ```
 
-- create Prisma service  
+- Create Prisma service  
   (`prisma/prisma.module.ts`, `prisma/prisma.service.ts`)
 - set up Swagger: install dependesies and initialise Swagger in `main.ts`
 
@@ -54,7 +54,7 @@ $ npx prisma db seed
 $ npm install --save @nestjs/swagger swagger-ui-express
 ```
 
-- implement CRUD operations for Article model
+- Implement CRUD operations for Article model
   - start with `npx nest generate resource`
   - import `PrismaModule` in the `ArticleModule`
   - create CRUD endpoints
@@ -62,6 +62,13 @@ $ npm install --save @nestjs/swagger swagger-ui-express
   - update Swagger response types
 
 ### 2. Input Validation & Transformation
+
+- Set up ValidationPipe globally
+  - `npm install class-validator class-transformer`
+  - in `main.ts` file and use the `app.useGlobalPipes` method to make `ValidationPipe` available globally in your application
+- Add validation rules to `CreateArticleDto`
+- Strip unnecessary properties from client requests
+- Transform dynamic URL paths with `ParseIntPipe`
 
 ## Installation
 

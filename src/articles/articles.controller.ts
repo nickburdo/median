@@ -45,13 +45,16 @@ export class ArticlesController {
 
   @Patch(':id')
   @ApiOkResponse({ type: ArticleEntity })
-  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
-    return this.articlesService.update(+id, updateArticleDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateArticleDto: UpdateArticleDto,
+  ) {
+    return this.articlesService.update(id, updateArticleDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: ArticleEntity })
-  remove(@Param('id') id: string) {
-    return this.articlesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.articlesService.remove(id);
   }
 }
