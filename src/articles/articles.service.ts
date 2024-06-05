@@ -20,21 +20,17 @@ export class ArticlesService {
   }
 
   findOne(id: number) {
-    return this.prisma.article.findFirst({ where: { id } });
+    return this.prisma.article.findUnique({ where: { id } });
   }
 
   async update(id: number, updateArticleDto: UpdateArticleDto) {
-    const article = await this.findOne(id);
-
     return this.prisma.article.update({
-      where: { title: article.title },
+      where: { id },
       data: updateArticleDto,
     });
   }
 
   async remove(id: number) {
-    const article = await this.findOne(id);
-
-    return this.prisma.article.delete({ where: { title: article.title } });
+    return this.prisma.article.delete({ where: { id } });
   }
 }

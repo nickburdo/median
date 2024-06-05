@@ -70,6 +70,13 @@ $ npm install --save @nestjs/swagger swagger-ui-express
 - Strip unnecessary properties from client requests
 - Transform dynamic URL paths with `ParseIntPipe`
 
+### 3. Error Handling
+
+- Detect and throw exceptions directly in controller
+- Handle exceptions by using exception filters:
+  - create a manual exception filter - `prisma-client-exception/prisma-client-exception.filter.ts`
+  - apply the exception filter to your application in `main.ts`
+
 ## Installation
 
 ```bash
