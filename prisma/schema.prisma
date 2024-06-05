@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Article {
-  id          Int       @default(autoincrement())
+  id          Int       @default(autoincrement())@unique
   title       String    @unique
   description String?
   body        String
