@@ -94,6 +94,35 @@ $ npm install --save @nestjs/swagger swagger-ui-express
   - use the `ClassSerializerInterceptor` to remove a field from the response
 - Returning the author along with an article
 
+### 5. Authentication
+
+- Implementing authentication in REST API
+  - create a new `auth` module - `npx nest generate resource` - without generate CRUD entry points
+  - install `passport`
+    - `npm install --save @nestjs/passport passport @nestjs/jwt passport-jwt`
+    - `npm install --save-dev @types/passport-jwt`
+  - configure passport in `src/auth.module.ts`
+- Implement a `POST/auth/login` endpoint
+  - create `asc/auth/dto/login.dto.ts` file and define `LoginDto` class
+  - create `asc/auth/entity/auth.entity.ts` file and define `AuthEntity` class
+  - create a new `login` method inside `AuthService`
+  - create the `POST/auth/login` method inside `AuthController`
+- Implement JWT authentication strategy
+  - create `asc/auth/strategy/jwt.strategy.ts` file and define `JwtStrategy` class
+  - add the `JwtStrategy` as a provider in the `AuthModule`
+  - to make `UsersService` accessible in the `JwtStrategy` class, add it in the exports of the `UsersModule`
+- Implement JWT auth guard
+  - create `asc/auth/jwt-auth.guard.ts` file and define `JwtAuthGuard` class
+  - add the `JwtAuthGuard` to routes in the `UsersController`
+- Integrate authentication in Swagger
+- Hashing passwords
+  - `npm install bcrypt`
+  - `npm install --save-dev @types/bcrypt`
+  - update the `create` and `update` methods in the `UsersService` to hash the password before storing it in the database
+  - update your database seed script (`prisma/seed.ts`) to hash the passwords before inserting them into the database
+  - `npx prisma db seed`
+  - update the `login` method in the `AuthService` to use hashed passwords:
+
 ## Installation
 
 ```bash
