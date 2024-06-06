@@ -77,12 +77,30 @@ $ npm install --save @nestjs/swagger swagger-ui-express
   - create a manual exception filter - `prisma-client-exception/prisma-client-exception.filter.ts`
   - apply the exception filter to your application in `main.ts`
 
+### 4. Handling Relational Data
+
+- Add a `User` model to the database
+  - update `prisma/schema.prisma`
+  - applay migration - `npx prisma migrate dev --name "add-user-model"`
+  - update `prisma.seed.ts` and execute `npx prisma db seed`
+- Add an `authorId` field to `ArticleEntity`
+- Implement CRUD endpoints for `Users`
+  - generate new `users` REST resource - `npx nest generate resource`
+  - add `PrismaClient` to the `Users` module
+  - define the `User` entity and DTO classes
+  - define the `UsersService` class
+  - sefine the `UsersController` class
+- Exclude `password` field from the response body
+  - use the `ClassSerializerInterceptor` to remove a field from the response
+- Returning the author along with an article
+
 ## Installation
 
 ```bash
 $ npm install
 $ docker-compose up -d
 $ npx prisma migrate dev
+$ npx prisma db seed
 ```
 
 ## Running the app
